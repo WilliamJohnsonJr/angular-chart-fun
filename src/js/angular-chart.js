@@ -221,10 +221,12 @@
     }
 
     function getColors (type, scope) {
+      console.log(scope.chartColors);
       var colors = angular.copy(scope.chartColors ||
         ChartJs.getOptions(type).chartColors ||
         Chart.defaults.global.colors
       );
+      console.log (colors);
       var notEnoughColors = colors.length < scope.chartData.length;
       while (colors.length < scope.chartData.length) {
         colors.push(scope.chartGetColor());
@@ -236,6 +238,10 @@
     }
 
     function convertColor (color) {
+      console.log(color);
+      // console.log(color.substr(1));
+      // console.log(hexToRgb(color.substr(1)));
+      // console.log(getColor(hexToRgb(color.substr(1))));
       if (typeof color === 'object' && color !== null) return color;
       if (typeof color === 'string' && color[0] === '#') return getColor(hexToRgb(color.substr(1)));
       return getRandomColor();
@@ -272,7 +278,6 @@
         r = (bigint >> 16) & 255,
         g = (bigint >> 8) & 255,
         b = bigint & 255;
-
       return [r, g, b];
     }
 

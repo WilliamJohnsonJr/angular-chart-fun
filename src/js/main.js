@@ -7,7 +7,32 @@ angular.module('app',['chart.js'])
  
   // this is the only way it works
   $scope.colors = ["#9FCC00","#FA6D21","#9a9a9a","#E9B145","#62A073","#FA605D"];
-  
+  $scope.colorTest = [
+  {
+    backgroundColor: "rgba(159,204,0,0.2)",
+    borderColor: "rgba(159,204,0,1)",
+    pointBackgroundColor: "rgba(159,204,0,1)",
+    pointBorderColor: "#fff",
+    pointHoverBackgroundColor: "rgba(159,204,0,0.8)",
+    pointHoverBorderColor: "rgba(159,204,0,1)"
+  },
+  {
+    backgroundColor: "rgba(250,109,33,0.2)",
+    borderColor: "rgba(250,109,33,1)",
+    pointBackgroundColor: "rgba(250,109,33,1)",
+    pointBorderColor: "#fff",
+    pointHoverBackgroundColor: "rgba(250,109,33,0.8)",
+    pointHoverBorderColor: "rgba(250,109,33,1)"      
+  },
+  {
+    backgroundColor: "rgba(154,154,154,0.2)",
+    borderColor: "rgba(154,154,154,1)",
+    pointBackgroundColor: "rgba(154,154,154,1)",
+    pointBorderColor: "#fff",
+    pointHoverBackgroundColor: "rgba(154,154,154,0.8)",
+    pointHoverBorderColor: "rgba(154,154,154,1)"
+  }
+  ];
   //no longer black, but colours change on every refresh, so this seems ignored
   //chart.js docs seemed to indicate this uses a color array, but only hex notation seems to work here. What about specifying specific rgba colours?
   $scope.arrayColors = [
