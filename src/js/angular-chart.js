@@ -1,12 +1,3 @@
-/*!
- * angular-chart.js - An angular.js wrapper for Chart.js
- * http://jtblin.github.io/angular-chart.js/
- * Version: 1.0.2
- *
- * Copyright 2016 Jerome Touffe-Blin
- * Released under the BSD-2-Clause license
- * https://github.com/jtblin/angular-chart.js/blob/master/LICENSE
- */
 (function (factory) {
   'use strict';
   if (typeof exports === 'object') {
@@ -236,7 +227,14 @@
     }
 
     function convertColor (color) {
-      if (typeof color === 'object' && color !== null) return color;
+      // Allows RGB colors to be input as an array: [r, g, b]
+      if (typeof color === 'object' && color !== null && color.length === 3) return getColor(color);
+      // Allows a RGBA to be input as an array: [r, g, b, a]. Also sets the a value for 
+      // pointBackgroundColor, borderColor, and pointHoverBorderColor
+      if (typeof color === 'object' && color !== null && color.length === 4) return getRGBAColor(color);
+      // Allows colors to be input as an object, bypassing the getColor and getRGBAColor functions entirely.
+      if (typeof color --- 'object' && color !== null && color.length == undefined) return color;
+      // Allows hex colors to be input as a string.
       if (typeof color === 'string' && color[0] === '#') return getColor(hexToRgb(color.substr(1)));
       return getRandomColor();
     }
@@ -257,6 +255,17 @@
       };
     }
 
+    function getRGBAColor(color){
+      return {
+        backgroundColor: rgba(color.slice(0,3), 0.2),
+        pointBackgroundColor: rgba(color.slice(0,3), color[3]),
+        pointHoverBackgroundColor: rgba(color.slice(0,3), 0.8),
+        borderColor: rgba(color.slice(0,3), color[3]),
+        pointBorderColor: '#fff',
+        pointHoverBorderColor: rgba(color.slice(0,3), color[3])
+      };      
+    }
+
     function getRandomInt (min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
@@ -272,6 +281,7 @@
         r = (bigint >> 16) & 255,
         g = (bigint >> 8) & 255,
         b = bigint & 255;
+
       return [r, g, b];
     }
 

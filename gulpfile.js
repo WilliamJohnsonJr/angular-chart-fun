@@ -2,6 +2,8 @@
 
 // Require our Gulp Plugins
 const gulp        = require('gulp'),
+      check       = require('gulp-check'),
+      util        = require('gulp-util'),
       sourcemaps  = require('gulp-sourcemaps'),
       source      = require('vinyl-source-stream'),
       buffer      = require('vinyl-buffer'),
@@ -62,6 +64,16 @@ gulp.task('server', function(done) {
     // open: false,
     notify: false
   });
+});
+
+// Runs gulp check when called from terminal
+gulp.task('check', function () {
+  gulp.src(['test/**/*.js'])
+    .pipe(check(/TODO/))
+    .on('error', function (err) {
+      util.beep();
+      util.log(util.colors.red(err));
+    });
 });
 
 // Builds our app
